@@ -9,42 +9,36 @@ module('Lesson 3 - Time');
 
 asyncTest('LaunchingAnActionInTheFuture', function() {
     var received = '';
-    var delay = _______;
-    Rx
-        .Scheduler
-        .immediate
-        .schedule(function() { received = 'Finished'; }, delay);
+    var delay = 500;
+    Rx.Scheduler
+      .immediate
+      .schedule(function() { received = 'Finished'; }, delay);
 
     setTimeout(function() { equals(received, 'Finished'); start(); }, 500);
 });
 
 asyncTest('LaunchingAnEventInTheFuture', function() {
     var received = '',
-        time = _______;
-        
-    Rx
-        .Observable
-        .returnValue('Godot', Rx.Scheduler.Immediate)
-        .delay(time)
-        .subscribe(function(x) { received = x; });
-    
+      time = 500;
+
+    Rx.Observable
+      .returnValue('Godot', Rx.Scheduler.Immediate)
+      .delay(time)
+      .subscribe(function(x) { received = x; });
+
     setTimeout(function() { equals(received, 'Godot'); start(); }, 500);
 });
 
 asyncTest('AWatchedPot', function() {
     var received = '',
-        delay = 500,
-        timeout = _______,
-        timeoutEvent =
-            Rx  .Observable
-                .returnValue('Tepid');
-    Rx
-        .Observable
-        .returnValue('Boiling')
-        .delay(delay)
-        .timeout(timeout, timeoutEvent)
-        .subscribe(function(x) { received = x; });
-    
+      delay = 500,
+      timeout = 600,
+      timeoutEvent = Rx.Observable.returnValue('Tepid');
+    Rx.Observable
+      .returnValue('Boiling')
+      .delay(delay)
+      .timeout(timeout, timeoutEvent)
+      .subscribe(function(x) { received = x; });
+
     setTimeout(function() { equals(received, 'Boiling'); start(); }, 500);
 });
- 
